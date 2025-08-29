@@ -1,5 +1,7 @@
 package com.javarush.esin.constans;
 
+import java.io.File;
+
 public class Constans {
 
     private static final String RUSALPHABET = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
@@ -12,5 +14,7 @@ public class Constans {
                                         + ENGALPHABET + ENGALPHABET.toLowerCase()
                                         + CYPHER + SYMBOLS;
 
+    public static final String TXT_FOLDER = System.getProperty("user.dir")
+                                            + File.separator + "text" + File.separator;
 
 }
