@@ -6,14 +6,7 @@ import com.javarush.esin.entity.ResultCode;
 
 public class KeyParser {
 
-    public static class ResultWithKey {
-        public final Integer key;
-        public final Result error;
-
-        public ResultWithKey(Integer key, Result error) {
-            this.key = key;
-            this.error = error;
-        }
+    public record ResultWithKey(Integer key, Result error) {
     }
 
     public static ResultWithKey parseKey(String keyStr) {

@@ -21,20 +21,20 @@ public class Encoder implements Action {
             return new Result("Not enough parameters. Usage: encode <filename> <key>", ResultCode.ERROR);
         }
 
-        // 1) Парсим ключ
+        // Парсим ключ
         KeyParser.ResultWithKey keyResult = KeyParser.parseKey(parameters[1]);
-        if (keyResult.error != null) return keyResult.error;
+        if (keyResult.error() != null) return keyResult.error();
 
-        // 2) Готовим пути
+        // Готовим пути
         PathHelper.ResultWithPaths paths = PathHelper.preparePaths(parameters[0], OUTPUT_FILE);
         if (paths.error() != null) return paths.error();
 
-        // 3) Читаем → шифруем → пишем
+        // Читаем - шифруем и пишем
         try {
             List<String> inputLines = Files.readAllLines(paths.inputPath());
             List<String> outputLines = new ArrayList<>();
             for (String line : inputLines) {
-                outputLines.add(CaesarCipher.shiftText(line, keyResult.key, true));
+                outputLines.add(CaesarCipher.shiftText(line, keyResult.key(), true));
             }
             Files.write(paths.outputPath(), outputLines);
         } catch (IOException e) {

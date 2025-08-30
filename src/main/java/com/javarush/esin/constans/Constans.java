@@ -10,7 +10,6 @@ public class Constans {
     private static final String ENGALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // добавлена N
     private static final String CYPHER = "0123456789";
 
-    // символы — дефис только один, нет дубликатов
     private static final String SYMBOLS = "\n.,:;-_+/*=<>?!@{}[]()№#$%^&*`~'\\\" ";
 
     public static final String ALPHABET = buildAlphabet();

@@ -22,20 +22,20 @@ public class Decoder implements Action {
             return new Result("Not enough parameters. Usage: decode <key>", ResultCode.ERROR);
         }
 
-        // 1) Парсим ключ
+        // Парсим ключ
         KeyParser.ResultWithKey keyResult = KeyParser.parseKey(parameters[0]);
-        if (keyResult.error != null) return keyResult.error;
+        if (keyResult.error() != null) return keyResult.error();
 
-        // 2) Готовим пути (вход всегда encoder.txt)
+        // Готовим пути (вход всегда encoder.txt)
         PathHelper.ResultWithPaths paths = PathHelper.preparePaths(INPUT_FILE, OUTPUT_FILE);
         if (paths.error() != null) return paths.error();
 
-        // 3) Читаем → дешифруем → пишем
+        // Читаем - дешифруем и пишем
         try {
             List<String> inputLines = Files.readAllLines(paths.inputPath());
             List<String> outputLines = new ArrayList<>();
             for (String line : inputLines) {
-                outputLines.add(CaesarCipher.shiftText(line, keyResult.key, false));
+                outputLines.add(CaesarCipher.shiftText(line, keyResult.key(), false));
             }
             Files.write(paths.outputPath(), outputLines);
         } catch (IOException e) {
